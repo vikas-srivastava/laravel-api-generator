@@ -1,0 +1,565 @@
+{
+  "modules": {
+    "cms": {
+      "classes": {
+        "PageTemplate": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "description",
+            "html_content",
+            "status",
+            "author_id",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/cms/templates",
+            "show": "/api/v1/cms/templates/{id}",
+            "store": "/api/v1/cms/templates",
+            "update": "/api/v1/cms/templates/{id}",
+            "delete": "/api/v1/cms/templates/{id}"
+          }
+        },
+        "Page": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "restore",
+            "forceDelete",
+            "versions"
+          ],
+          "fields": [
+            "title",
+            "slug",
+            "content",
+            "excerpt",
+            "featured_image",
+            "author_id",
+            "status",
+            "template_id",
+            "version_number",
+            "parent_version_id",
+            "created_at",
+            "updated_at",
+            "published_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/cms/pages",
+            "show": "/api/v1/cms/pages/{id}",
+            "store": "/api/v1/cms/pages",
+            "update": "/api/v1/cms/pages/{id}",
+            "delete": "/api/v1/cms/pages/{id}",
+            "restore": "/api/v1/cms/pages/{id}/restore",
+            "forceDelete": "/api/v1/cms/pages/{id}/force-delete",
+            "versions": "/api/v1/cms/pages/{id}/versions"
+          }
+        },
+        "PageVersion": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "restore",
+            "forceDelete"
+          ],
+          "fields": [
+            "page_id",
+            "version_number",
+            "content",
+            "author_id",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/cms/page-versions",
+            "show": "/api/v1/cms/page-versions/{id}",
+            "store": "/api/v1/cms/page-versions",
+            "restore": "/api/v1/cms/page-versions/{id}/restore",
+            "forceDelete": "/api/v1/cms/page-versions/{id}/force-delete"
+          }
+        }
+      }
+    },
+    "blog": {
+      "classes": {
+        "BlogPost": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "restore",
+            "forceDelete"
+          ],
+          "fields": [
+            "title",
+            "slug",
+            "content",
+            "excerpt",
+            "author_id",
+            "status",
+            "published_at",
+            "category_id",
+            "featured_image",
+            "meta_data"
+          ],
+          "endpoints": {
+            "index": "/api/v1/blog/posts",
+            "show": "/api/v1/blog/posts/{id}",
+            "store": "/api/v1/blog/posts",
+            "update": "/api/v1/blog/posts/{id}",
+            "delete": "/api/v1/blog/posts/{id}",
+            "restore": "/api/v1/blog/posts/{id}/restore",
+            "forceDelete": "/api/v1/blog/posts/{id}/force-delete"
+          }
+        },
+        "BlogComment": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "approve",
+            "spam",
+            "trash",
+            "restore",
+            "forceDelete"
+          ],
+          "fields": [
+            "post_id",
+            "user_id",
+            "parent_id",
+            "content",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/blog/comments",
+            "show": "/api/v1/blog/comments/{id}",
+            "store": "/api/v1/blog/comments",
+            "update": "/api/v1/blog/comments/{id}",
+            "delete": "/api/v1/blog/comments/{id}",
+            "approve": "/api/v1/blog/comments/{id}/approve",
+            "spam": "/api/v1/blog/comments/{id}/spam",
+            "trash": "/api/v1/blog/comments/{id}/trash",
+            "restore": "/api/v1/blog/comments/{id}/restore",
+            "forceDelete": "/api/v1/blog/comments/{id}/force-delete"
+          }
+        },
+        "BlogCategory": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "description",
+            "parent_id"
+          ],
+          "endpoints": {
+            "index": "/api/v1/blog/categories",
+            "show": "/api/v1/blog/categories/{id}",
+            "store": "/api/v1/blog/categories",
+            "update": "/api/v1/blog/categories/{id}",
+            "delete": "/api/v1/blog/categories/{id}"
+          }
+        },
+        "BlogTag": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug"
+          ],
+          "endpoints": {
+            "index": "/api/v1/blog/tags",
+            "show": "/api/v1/blog/tags/{id}",
+            "store": "/api/v1/blog/tags",
+            "update": "/api/v1/blog/tags/{id}",
+            "delete": "/api/v1/blog/tags/{id}"
+          }
+        },
+        "BlogMedia": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "delete",
+            "update"
+          ],
+          "fields": [
+            "file_name",
+            "file_path",
+            "mime_type",
+            "size",
+            "uploaded_by",
+            "alt_text",
+            "title",
+            "description",
+            "metadata"
+          ],
+          "endpoints": {
+            "index": "/api/v1/media",
+            "show": "/api/v1/media/{id}",
+            "store": "/api/v1/media",
+            "delete": "/api/v1/media/{id}",
+            "update": "/api/v1/media/{id}"
+          }
+        }
+      }
+    },
+    "newsletter": {
+      "classes": {
+        "Subscriber": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "delete"
+          ],
+          "fields": [
+            "email",
+            "subscribed_at",
+            "status"
+          ],
+          "endpoints": {
+            "index": "/api/v1/newsletter/subscribers",
+            "show": "/api/v1/newsletter/subscribers/{id}",
+            "store": "/api/v1/newsletter/subscribers",
+            "delete": "/api/v1/newsletter/subscribers/{id}"
+          }
+        },
+        "Campaign": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "send"
+          ],
+          "fields": [
+            "title",
+            "content",
+            "status",
+            "scheduled_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/newsletter/campaigns",
+            "show": "/api/v1/newsletter/campaigns/{id}",
+            "store": "/api/v1/newsletter/campaigns",
+            "update": "/api/v1/newsletter/campaigns/{id}",
+            "delete": "/api/v1/newsletter/campaigns/{id}",
+            "send": "/api/v1/newsletter/campaigns/{id}/send"
+          }
+        }
+      }
+    },
+    "portfolio": {
+      "classes": {
+        "Project": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "title",
+            "description",
+            "featured_image",
+            "client",
+            "category_id",
+            "completed_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/portfolio/projects",
+            "show": "/api/v1/portfolio/projects/{id}",
+            "store": "/api/v1/portfolio/projects",
+            "update": "/api/v1/portfolio/projects/{id}",
+            "delete": "/api/v1/portfolio/projects/{id}"
+          }
+        }
+      }
+    },
+    "multi-shop-owner": {
+      "classes": {
+        "Owner": {
+          "features": [
+            "index",
+            "show",
+            "update",
+            "delete",
+            "listOwnedShops"
+          ],
+          "fields": [
+            "name",
+            "email",
+            "phone",
+            "shops_count",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/owners",
+            "show": "/api/v1/owners/{id}",
+            "update": "/api/v1/owners/{id}",
+            "delete": "/api/v1/owners/{id}",
+            "listOwnedShops": "/api/v1/owners/{id}/shops"
+          }
+        }
+      }
+    },
+    "multiShop": {
+      "classes": {
+        "Shop": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "addOwner",
+            "removeOwner",
+            "listShopsByOwner"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "owner_id",
+            "location",
+            "currency",
+            "created_at",
+            "updated_at",
+            "status"
+          ],
+          "endpoints": {
+            "index": "/api/v1/shops",
+            "show": "/api/v1/shops/{id}",
+            "store": "/api/v1/shops",
+            "update": "/api/v1/shops/{id}",
+            "delete": "/api/v1/shops/{id}",
+            "addOwner": "/api/v1/shops/{id}/add-owner",
+            "removeOwner": "/api/v1/shops/{id}/remove-owner",
+            "listShopsByOwner": "/api/v1/owners/{owner_id}/shops"
+          }
+        },
+        "Product": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "description",
+            "price",
+            "stock",
+            "category_id",
+            "product_type_id",
+            "featured_image",
+            "tags",
+            "shipping_type_id",
+            "shipping_price",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/products",
+            "show": "/api/v1/products/{id}",
+            "store": "/api/v1/products",
+            "update": "/api/v1/products/{id}",
+            "delete": "/api/v1/products/{id}"
+          }
+        },
+        "ProductCategory": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "description",
+            "parent_id",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/categories",
+            "show": "/api/v1/categories/{id}",
+            "store": "/api/v1/categories",
+            "update": "/api/v1/categories/{id}",
+            "delete": "/api/v1/categories/{id}"
+          }
+        },
+        "ProductTag": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/tags",
+            "show": "/api/v1/tags/{id}",
+            "store": "/api/v1/tags",
+            "update": "/api/v1/tags/{id}",
+            "delete": "/api/v1/tags/{id}"
+          }
+        },
+        "ProductType": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete"
+          ],
+          "fields": [
+            "name",
+            "slug",
+            "description",
+            "created_at",
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/product-types",
+            "show": "/api/v1/product-types/{id}",
+            "store": "/api/v1/product-types",
+            "update": "/api/v1/product-types/{id}",
+            "delete": "/api/v1/product-types/{id}"
+          }
+        },
+        "Order": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "refund",
+            "listOrdersByShop"
+          ],
+          "fields": [
+            "shop_id",
+            "customer_id",
+            "product_id",
+            "quantity",
+            "total_price",
+            "status",
+            "order_date",
+            "delivery_date"
+          ],
+          "endpoints": {
+            "index": "/api/v1/shops/{shop_id}/orders",
+            "show": "/api/v1/shops/{shop_id}/orders/{id}",
+            "store": "/api/v1/shops/{shop_id}/orders",
+            "update": "/api/v1/shops/{shop_id}/orders/{id}",
+            "delete": "/api/v1/shops/{shop_id}/orders/{id}",
+            "refund": "/api/v1/shops/{shop_id}/orders/{id}/refund",
+            "listOrdersByShop": "/api/v1/shops/{shop_id}/orders"
+          }
+        },
+        "BulkOrder": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "delete",
+            "process",
+            "cancel"
+          ],
+          "fields": [
+            "shop_id",
+            "order_ids", 
+            "bulk_order_type", 
+            "status", 
+            "created_by", 
+            "processed_at", 
+            "canceled_at",
+            "created_at", 
+            "updated_at"
+          ],
+          "endpoints": {
+            "index": "/api/v1/bulk-orders",
+            "show": "/api/v1/bulk-orders/{id}",
+            "store": "/api/v1/bulk-orders",
+            "update": "/api/v1/bulk-orders/{id}",
+            "delete": "/api/v1/bulk-orders/{id}",
+            "process": "/api/v1/bulk-orders/{id}/process",
+            "cancel": "/api/v1/bulk-orders/{id}/cancel"
+          }
+        },
+        "Payment": {
+          "features": [
+            "index",
+            "show",
+            "store",
+            "update",
+            "refund",
+            "listPaymentsByShop"
+          ],
+          "fields": [
+            "shop_id",
+            "order_id",
+            "amount",
+            "status",
+            "payment_date",
+            "method",
+            "transaction_id"
+          ],
+          "endpoints": {
+            "index": "/api/v1/shops/{shop_id}/payments",
+            "show": "/api/v1/shops/{shop_id}/payments/{id}",
+            "store": "/api/v1/shops/{shop_id}/payments",
+            "update": "/api/v1/shops/{shop_id}/payments/{id}",
+            "refund": "/api/v1/shops/{shop_id}/payments/{id}/refund",
+            "listPaymentsByShop": "/api/v1/shops/{shop_id}/payments"
+          }
+        }
+      }
+    }
+  }
+}
