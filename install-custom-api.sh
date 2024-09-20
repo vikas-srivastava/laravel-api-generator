@@ -26,11 +26,11 @@ else
 fi
 
 # Copy docker-compose.yml from local folder
-echo "Copying docker-compose.yml from local folder..."
-if [[ ! -f "../docker-compose.yml" ]]; then
+echo "Copying example-docker-compose.yml from local folder..."
+if [[ ! -f "../example-docker-compose.yml" ]]; then
     error_exit "docker-compose.yml not found in the parent directory"
 fi
-cp ../docker-compose.yml docker-compose.yml || error_exit "Failed to copy docker-compose.yml"
+cp ../example-docker-compose.yml docker-compose.yml || error_exit "Failed to copy docker-compose.yml"
 
 
 # Update .env file
@@ -47,15 +47,6 @@ echo "Rebuilding Sail with progress..."
 # Start Sail
 echo "Starting Sail..."
 ./vendor/bin/sail up -d || error_exit "Failed to start Sail"
-
-# Create the database
-DB_DATABASE=$(grep DB_DATABASE .env | cut -d '=' -f 2)
-if [[ -z "$DB_DATABASE" ]]; then
-    error_exit "Database name is not set in the .env file"
-fi
-echo "Creating the database $DB_DATABASE..."
-./vendor/bin/sail exec postgres psql -U sail -d postgres -c "CREATE DATABASE \"$DB_DATABASE\";" || error_exit "Failed to create database"
-
 
 # Run migrations
 echo "Running migrations..."
@@ -78,33 +69,9 @@ echo "Setting up Scramble..."
 echo "Installing Laravel Tools..."
 echo "Please manually download and place the required files in App/console/Commands folder"
 
-# Generate Default Database Schema
-echo "Generating Default Database Schema..."
-./vendor/bin/sail artisan make:migration create_bussiness_specific_actors_use_cases_schema || error_exit "Failed to create migration"
-./vendor/bin/sail artisan migrate || error_exit "Failed to run migration"
-
-# Install Laravel Octane (Optional)
-read -p "Do you want to install Laravel Octane? (y/n) " install_octane
-if [[ $install_octane =~ ^[Yy]$ ]]; then
-    echo "Installing Laravel Octane..."
-    ./vendor/bin/sail composer require laravel/octane || error_exit "Failed to install Laravel Octane"
-fi
-
-# Add Private Git Repository (Laravel API Generator)
-# echo "Adding private Git repository for Laravel API Generator..."
-# ./vendor/bin/sail composer config repositories.laravel-api-generator vcs git@github.com:vikas-srivastava/laravel-api-generator.git || error_exit "Failed to add private repository"
-# ./vendor/bin/sail composer require vikas-srivastava/laravel-api-generator || error_exit "Failed to install Laravel API Generator"
-
-# ./vendor/bin/sail artisan vendor:publish --provider="vikas-srivastava\laravel-api-generator\ApiGeneratorServiceProvider" --tag="config"
-
-# Setup Base API - Edit cms_modules as per your Bussiness Context
-# echo "Setting up Base API Models based upon cms_modules.php"
-# ./vendor/bin/sail artisan vcapi:generate || error_exit "Failed to create base API models"
-# ./vendor/bin/sail artisan migrate || error_exit "Failed to run migrations after generating API models"
-
 # Optimize Composer
 echo "Optimizing Composer..."
 ./vendor/bin/sail composer dump-autoload || error_exit "Failed to dump autoload"
-./vendor/bin/sail composer optimize || error_exit "Failed to optimize Composer"
+./vendor/bin/sail artisan optimize || error_exit "Failed to optimize Composer"
 
 echo "Setup complete! Don't forget to manually review and adjust the generated files as needed."
